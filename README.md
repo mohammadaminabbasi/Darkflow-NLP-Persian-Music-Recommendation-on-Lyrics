@@ -1,4 +1,4 @@
-# NLP-Persian-Music-Recommendation-Lyrics
+# NLP Persian Music Recommendation by Lyrics with NLP
 ![](resources/persian-example.png)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
