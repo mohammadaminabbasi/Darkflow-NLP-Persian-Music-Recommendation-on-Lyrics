@@ -1,4 +1,4 @@
-# NLP Persian Music Recommendation by Lyrics
+# Darkflow Persian Music Recommendation on Lyrics
 ![](resources/persian-example.png)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
