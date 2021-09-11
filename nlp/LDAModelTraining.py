@@ -44,9 +44,9 @@ class LDAModelTraining:
     def save_model(self, mdl):
         mdl.save('lda_model.bin')
 
-    def test(self, song: Song):
+    def test(self, title: str, lyric: str):
         doc = []
-        lyric = song.lyric.split("\n")
+        lyric = lyric.split("\n")
         for line in lyric:
             for word in line.strip().split():
                 doc.append(word)
@@ -55,7 +55,7 @@ class LDAModelTraining:
         topic_dist, ll = self.mdl.infer(doc_inst)
         best_topic_index = list(topic_dist).index(max(topic_dist))
         best_topic_word_list = self.mdl.get_topic_words(best_topic_index, top_n=self.word_topic_show)
-        print(song.title)
+        print(title)
         print(f"Best Topic: {self.get_words_of_topic(best_topic_word_list)}")
         print(f"topic: {self.topic_map[best_topic_index]}")
         print(f"percentage: {round(max(topic_dist), 2)}")
@@ -78,14 +78,17 @@ class LDAModelTraining:
         client = Client()
         normalizer = hazm.Normalizer()
 
-        # for url in urls:
-        #     song = client.get_song_by_url(url)
-        #     self.test(song)
+        for url in urls:
+            song = client.get_song_by_url(url)
+            self.test(song.title, song.lyric)
 
-        mazhabi_song = client.get_song_by_url(urls[0])
-        mazhabi_song.title = "Reza Narimani - \"Manam Bayad Beram\""
-        mazhabi_song.lyric = normalizer.normalize(open("./resources/test_data.txt").read())
-        self.test(mazhabi_song)
+        title = "test lyric"
+        lyric = normalizer.normalize(open("./resources/test_data.txt").read())
+        self.test(title, lyric)
+
+    def print_topics(self):
+        for i in range(0, 3):
+            print(i, LDAModelTraining().get_words_of_topic(self.mdl.get_topic_words(i, top_n=self.word_topic_show)))
 
 
 LDAModelTraining().fetch_data_test()

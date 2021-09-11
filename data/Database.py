@@ -2,6 +2,7 @@ import psycopg2
 from radiojavanapi.models import Song
 
 from model.SongTokensModel import SongTokensModel
+from nlp.StopWords import StopWords
 
 
 class Database:
@@ -43,8 +44,8 @@ class Database:
 
             for song in records:
                 song_id = song[0]
-                lyric = song[1]
-                song_list.append(SongTokensModel(song_id, None, lyric))
+                tokens = song[1]
+                song_list.append(SongTokensModel(song_id, tokens, ""))
 
             return song_list
         except (Exception, psycopg2.Error) as error:
@@ -98,11 +99,11 @@ class Database:
                 if str(token_lemma) == word_to_remove:
                     self.remove_token_database(song.id, token_lemma)
 
-    def remove_token_database(self, id: int, word_to_remove: str):
-        print(id)
+    def remove_token_database(self, song_id: int, word_to_remove: str):
+        print(song_id)
         print(word_to_remove)
         self.cursor.execute("UPDATE song1 SET tokens_lemma = array_remove(tokens_lemma, %s) where id = %s",
-                            (word_to_remove, id,))
+                            (word_to_remove, song_id,))
         self.connection.commit()
 
     def delete_all_puncs_from_tokens(self):
@@ -115,6 +116,17 @@ class Database:
                     self.cursor.execute("UPDATE song1 SET tokens_lemma = array_remove(tokens_lemma, %s)",
                                         (token_lemma,))
                     self.connection.commit()
+
+    def remove_stop_words_from_tokens(self):
+        stop_words = StopWords()
+        song_list = self.get_songs_id_lemma()
+        for song in song_list:
+            if song.tokens is not None:
+                for token in song.tokens:
+                    if stop_words.is_stop_word(token):
+                        print(song.id, token)
+                        print("-------------------")
+                        self.remove_token_database(song.id, token)
 
     def close_connection(self):
         if self.connection:
