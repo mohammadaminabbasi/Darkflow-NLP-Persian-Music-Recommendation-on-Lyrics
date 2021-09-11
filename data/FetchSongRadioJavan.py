@@ -2,7 +2,7 @@ from radiojavanapi import Client
 import psycopg2
 
 from data.Database import Database
-from model.Category import SongCategory
+from model.SongCategory import SongCategory
 
 
 class FetchSongRadioJavan:

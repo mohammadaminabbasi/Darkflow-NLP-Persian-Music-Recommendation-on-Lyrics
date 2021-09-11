@@ -11,9 +11,7 @@ from utils.Utils import remove_punctuation
 
 class NlpProcess:
 
-    # 1.fetch_lyrics
-    # 2.normalizer
-    # 3.tokenize_lemmatizer_stanza_hazm
+    # 1.fetch_lyrics 2.normalizer 3.tokenize_lemmatizer_stanza_hazm
 
     def __init__(self):
         self.fa_nlp_pipeline = stanza.Pipeline('fa', processors='tokenize,lemma,pos,depparse', verbose=False,

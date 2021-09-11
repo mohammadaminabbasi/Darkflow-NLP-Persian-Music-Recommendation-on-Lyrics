@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 
 from data.Database import Database
-from model.Category import SongCategory
+from model.SongCategory import SongCategory
 
 
 class WebScrappingPraise:
