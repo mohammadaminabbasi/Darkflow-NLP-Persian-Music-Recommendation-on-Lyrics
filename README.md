@@ -38,14 +38,16 @@ for remove Stop Words, i used [Stop Word list](https://github.com/rahmanidashti/
     │   ├── NlpProcess                # normalize & tokenize & lemmatize   
     │   └── StopWords.py              # check each token is StopWord
     |
-    ├── resources                     # Activity/View layer
-    │   ├── base                      # Base View
-    │   ├── main                      # Main Screen Activity & ViewModel
-    |   │   ├── adapter               # Adapter for RecyclerView
-    |   │   └── viewmodel             # ViewHolder for RecyclerView   
-    │   └── details                   # Detail Screen Activity and ViewModel
+    ├── resources                     # resource files
+    │   ├── word-cloud.png            # word cloud image
+    │   ├── stopwords_all.txt         # list of stopwords
+    │   └── test_data.txt             # text file to insert lyric to test model 
     |
-    └── utils               # Utility C
+    ├── training_model                
+    │   └── lda_model.bin             # prepared model
+    │
+    └── utils                
+        └── utils.py             # utils for check has numbers & remove punctuation
 
 ## License
  
