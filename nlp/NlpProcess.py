@@ -21,8 +21,8 @@ class NlpProcess:
     def __normalizer(self, text):
         normalizer = hazm.Normalizer()
         text = normalizer.normalize(text)
-        text = remove_punctuation(text)
-        return text
+        text_normalized = remove_punctuation(text)
+        return text_normalized
 
     def __tokenize_lemmatizer_stanza_hazm(self, text: str):
         tokens = []
@@ -59,6 +59,8 @@ class NlpProcess:
 
         for song in songs:
             print(song.id)
-            song.lyric = self.__normalizer(song.lyric)
-            song.tokens = self.__tokenize_lemmatizer_stanza_hazm(song.lyric)
+            lyric_song = self.__normalizer(song.lyric)
+            song.lyric = lyric_song
+            song.tokens = self.__tokenize_lemmatizer_stanza_hazm(lyric_song)
             self.__add_tokens_database(song)
+
