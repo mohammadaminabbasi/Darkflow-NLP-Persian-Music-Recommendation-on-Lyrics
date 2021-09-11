@@ -7,6 +7,9 @@
 the target og this project is identifying topic of each persian song, whith unsupervised process by **LDA** method of topic modelling
 
 ## Online Test in Colab
+ 
+We currently have three topics : **Hip Hop & Gang** & **Romantic** & **Religious** 
+you can test online this AI model in the link below:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1ZPCBFLZW_5ZhnO0cnVW40DtMWKp48OR0?usp=sharing)
 
 
