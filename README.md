@@ -1,6 +1,6 @@
 
 # Darkflow Persian Music Recommendation on Lyrics
-![](resources/darkflow.jpg)
+![](resources/darkflow1.png)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## About
