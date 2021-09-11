@@ -6,6 +6,9 @@
 ## About
 the target og this project is identifying topic of each persian song, whith unsupervised process by **LDA** method of topic modelling
 
+## Online Test in Colab
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](Persian_Music_Recommendation.ipynb)
+
 
 ## DataSet
 data set contains 800 lyrics of **Hip Hop Diss & Gang** Tracks & **Romantic** songs & **Religious** songs
