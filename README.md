@@ -8,14 +8,14 @@ the target og this project is identifying topic of each persian song, whith unsu
 
 ## Online Test in Colab
  
-We currently have three topics : **Hip Hop & Gang** & **Romantic** & **Religious** 
+We currently have three topics : **Gang/Diss** & **Romantic** & **Religious** 
 you can test online this AI model in the link below:
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1ZPCBFLZW_5ZhnO0cnVW40DtMWKp48OR0?usp=sharing)
 
 
 ## DataSet
-data set contains 800 lyrics of **Hip Hop Diss & Gang** Tracks & **Romantic** songs & **Religious** songs
+data set contains 800 lyrics of **Hip Hop Gang/Diss** Tracks & **Romantic** songs & **Religious** songs
 i fetch 554 lyric from [RadioJavan](https://radiojavan.com) songs with [RadioJavanApi](https://github.com/xHossein/radiojavanapi/)
 and fetch 225 lyric from [beharalashar](https://www.beharalashar.ir) with web scrapping and insert all to Postgresql database
 
