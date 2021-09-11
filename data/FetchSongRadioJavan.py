@@ -31,11 +31,11 @@ class FetchSongRadioJavan:
 
         client = Client()
         self.__insert_song_of_playlist_deteils(client, self.list_happy_love,
-                                             SongCategory.happyLove.value)
+                                               SongCategory.happyLove.value)
         self.__insert_song_of_playlist_deteils(client, self.list_dep_love,
-                                             SongCategory.depLove.value)
+                                               SongCategory.depLove.value)
         self.__insert_song_of_playlist_deteils(client, self.list_hip_hop,
-                                             SongCategory.hipHop.value)
+                                               SongCategory.hipHop.value)
 
     def __insert_song_of_playlist_deteils(self, client: Client, list_of_playlist: [], category: str):
         database = Database()
@@ -43,10 +43,13 @@ class FetchSongRadioJavan:
         for playlist_id in list_of_playlist:
             playlist = client.get_music_playlist_by_id(playlist_id)
             for meta_song in playlist.songs:
-                song = client.get_song_by_id(meta_song.id)
-                print(meta_song.name + " inserting...")
-                if song.lyric is not None:
-                    try:
-                        database.insert_song_to_database(meta_song, category)
-                    except (Exception, psycopg2.Error) as error:
-                        print("Error db: ", error)
+                try:
+                    song = client.get_song_by_id(meta_song.id)
+                    print(meta_song.name + " inserting...")
+                    if song.lyric is not None:
+                        try:
+                            database.insert_song_to_database(song, category)
+                        except (Exception, psycopg2.Error) as error:
+                            print("Error db: ", error)
+                except Exception as e:
+                    print(e)

@@ -38,7 +38,7 @@ class WebScrappingPraise:
 
         self.database.insert_praise_to_database(name.strip(), lyric.strip(), praise_url, category)
 
-    def start_scrapping(self):
+    def scrap(self):
         url = "https://www.beharalashar.ir/fehrest/"
         for page in range(1, 16):
-            self.fetch_praise_list(url + str(page))
+            self.__fetch_praise_list(url + str(page))
