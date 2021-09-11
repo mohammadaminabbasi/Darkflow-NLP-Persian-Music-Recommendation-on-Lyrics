@@ -1,9 +1,13 @@
 
 # Darkflow Persian Music Recommendation on Lyrics
-![](resources/persian-example.png)
+![](resources/darkflow1.png)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+## About
 the target og this project is identifying topic of each persian song, whith unsupervised process by **LDA** method of topic modelling
+
+## Online Test in Colab
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1ZPCBFLZW_5ZhnO0cnVW40DtMWKp48OR0?usp=sharing)
 
 
 ## DataSet
@@ -51,7 +55,7 @@ for remove Stop Words, i used [Stop Word list](https://github.com/rahmanidashti/
         └── utils.py                  # utils for check has numbers & remove punctuation
 
 ## License
- 
+```
 MIT License
 
 Copyright (c) 2021 Mohammad amin abbasi
@@ -73,3 +77,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
