@@ -15,8 +15,9 @@ class Database:
 
     def insert_song_to_database(self, song: Song, category: str):
         try:
-            self.cursor.execute(f"""INSERT INTO song VALUES (%s, %s, %s, %s, %s, %s, %s)""",
-                                (song.id, song.artist, song.name, song.duration, song.lyric, song.link, category))
+            self.cursor.execute(
+                f"""INSERT INTO song1(artist, name, duration, lyric, link, category, tokens_lemma) VALUES (%s, %s, %s, %s, %s, %s, %s)""",
+                (song.artist, song.name, song.duration, song.lyric, song.link, category, None))
             self.connection.commit()
             print("1 Record inserted successfully")
 
@@ -26,8 +27,8 @@ class Database:
     def insert_praise_to_database(self, name: str, lyric: str, link: str, category: str):
         try:
             self.cursor.execute(
-                f"""INSERT INTO song(artist, name, duration, lyric, link, category) VALUES (%s, %s, %s, %s, %s, %s)""",
-                (None, name, None, lyric, link, category))
+                f"""INSERT INTO song1(artist, name, duration, lyric, link, category, tokens_lemma) VALUES (%s, %s, %s, %s, %s, %s, %s)""",
+                (None, name, None, lyric, link, category, None))
             self.connection.commit()
             print("1 Record inserted successfully")
 
@@ -36,7 +37,7 @@ class Database:
 
     def get_songs_id_lemma(self):
         try:
-            self.cursor.execute("SELECT id,tokens_lemma from song ORDER BY id")
+            self.cursor.execute("SELECT id,tokens_lemma from song1 ORDER BY id")
             records = self.cursor.fetchall()
             song_list = []
 
@@ -51,14 +52,14 @@ class Database:
 
     def get_songs_id_lyric(self):
         try:
-            self.cursor.execute("SELECT id,lyric from song ORDER BY id")
+            self.cursor.execute("SELECT id,lyric from song1 ORDER BY id")
             records = self.cursor.fetchall()
             song_list = []
 
             for song in records:
                 id = song[0]
                 lyric = song[1]
-                song_list.append(SongTokensModel(id, lyric))
+                song_list.append(SongTokensModel(id, None, lyric))
 
             return song_list
         except (Exception, psycopg2.Error) as error:
@@ -82,11 +83,11 @@ class Database:
         print(id)
         print(token_item)
         print(replace_word)
-        self.cursor.execute("update song set tokens_lemma[%s] = %s where id = %s", (token_item, replace_word, id,))
+        self.cursor.execute("update song1 set tokens_lemma[%s] = %s where id = %s", (token_item, replace_word, id,))
         self.connection.commit()
 
     def add_to_tokens(self, song_id: int, token: str):
-        self.cursor.execute(f"""UPDATE song SET tokens_lemma = array_append(song.tokens_lemma, %s) WHERE id = %s""",
+        self.cursor.execute(f"""UPDATE song1 SET tokens_lemma = array_append(song1.tokens_lemma, %s) WHERE id = %s""",
                             (str(token).strip(), song_id,))
         self.connection.commit()
 
@@ -100,7 +101,7 @@ class Database:
     def remove_token_database(self, id: int, word_to_remove: str):
         print(id)
         print(word_to_remove)
-        self.cursor.execute("UPDATE song SET tokens_lemma = array_remove(tokens_lemma, %s) where id = %s",
+        self.cursor.execute("UPDATE song1 SET tokens_lemma = array_remove(tokens_lemma, %s) where id = %s",
                             (word_to_remove, id,))
         self.connection.commit()
 
@@ -111,7 +112,8 @@ class Database:
                 # if has_punctuation(token_lemma) and len(str(token_lemma).strip()) == 1:
                 if len(str(token_lemma).strip()) == 0:
                     print(token_lemma)
-                    self.cursor.execute("UPDATE song SET tokens_lemma = array_remove(tokens_lemma, %s)", (token_lemma,))
+                    self.cursor.execute("UPDATE song1 SET tokens_lemma = array_remove(tokens_lemma, %s)",
+                                        (token_lemma,))
                     self.connection.commit()
 
     def close_connection(self):

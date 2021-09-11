@@ -1,5 +1,3 @@
-import string
-
 import hazm
 import stanza
 
@@ -10,19 +8,15 @@ from utils.Utils import remove_punctuation
 
 
 class NlpProcess:
-
     # 1.fetch_lyrics 2.normalizer 3.tokenize_lemmatizer_stanza_hazm
 
-    def __init__(self):
-        self.fa_nlp_pipeline = stanza.Pipeline('fa', processors='tokenize,lemma,pos,depparse', verbose=False,
-                                               use_gpu=False)
+    fa_nlp_pipeline = stanza.Pipeline('fa', processors='tokenize,lemma,pos,depparse', verbose=False,
+                                      use_gpu=False)
 
     def __fetch_lyrics(self):
         database = Database()
         songs = database.get_songs_id_lyric()
         return songs
-        # cursor.execute(f"""UPDATE song SET tokens_lemma = array_append(song.tokens_lemma, %s) WHERE id = %s""",
-        #                (str(token).strip(), id,))
 
     def __normalizer(self, text):
         normalizer = hazm.Normalizer()
@@ -38,7 +32,7 @@ class NlpProcess:
 
         for i, sent in enumerate(fa_nlp_stanza.sentences):
             for word in sent.words:
-                if stop_word.is_stop_word(word):
+                if not stop_word.is_stop_word(word.text):
                     try:
                         token = str(word.lemma)
                         if token.__contains__('#'):
@@ -64,6 +58,7 @@ class NlpProcess:
         songs = self.__fetch_lyrics()
 
         for song in songs:
+            print(song.id)
             song.lyric = self.__normalizer(song.lyric)
             song.tokens = self.__tokenize_lemmatizer_stanza_hazm(song.lyric)
             self.__add_tokens_database(song)
