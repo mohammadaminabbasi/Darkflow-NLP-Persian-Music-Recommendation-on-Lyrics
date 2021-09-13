@@ -39,3 +39,6 @@ class CountVector:
         top_repeated_words = dict(sorted(count_map.items(), key=lambda item: item[1], reverse=True)[:20])
         for hash_map in top_repeated_words:
             print(f"{hash_map} :: {top_repeated_words[hash_map]}")
+
+
+CountVector().count()

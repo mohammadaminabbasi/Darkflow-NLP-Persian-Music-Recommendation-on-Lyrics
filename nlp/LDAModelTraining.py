@@ -78,9 +78,9 @@ class LDAModelTraining:
         client = Client()
         normalizer = hazm.Normalizer()
 
-        for url in urls:
-            song = client.get_song_by_url(url)
-            self.test(song.title, song.lyric)
+        # for url in urls:
+        #     song = client.get_song_by_url(url)
+        #     self.test(song.title, song.lyric)
 
         title = "test lyric"
         lyric = normalizer.normalize(open("./resources/test_data.txt").read())
@@ -91,4 +91,4 @@ class LDAModelTraining:
             print(i, LDAModelTraining().get_words_of_topic(self.mdl.get_topic_words(i, top_n=self.word_topic_show)))
 
 
-LDAModelTraining().fetch_data_test()
+LDAModelTraining().print_topics()
