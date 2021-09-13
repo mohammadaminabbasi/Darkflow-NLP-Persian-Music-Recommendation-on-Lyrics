@@ -15,8 +15,8 @@ def main():
     # nlp_process = NlpProcess()
     # nlp_process.start_nlp_process()
 
-    # database = Database()
-    # database.remove_stop_words_from_tokens()
+    database = Database()
+    database.remove_stop_words_from_tokens()
 
     lda_model_training = LDAModelTraining()
     lda_model_training.train()
